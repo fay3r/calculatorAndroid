@@ -24,16 +24,23 @@ public class MainActivity extends AppCompatActivity {
     Integer mode=1;
 
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("savedResultTag",savedResult);
         outState.putString("savedHistoryTag",savedHistory);
+        outState.putDouble("input1Tag",input1);
+        outState.putDouble("input2Tag",input2);
+        outState.putChar("actionTag",action);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState){
             savedResult = savedInstanceState.getString("savedResultTag");
             savedHistory = savedInstanceState.getString("savedHistoryTag");
+            input1 = savedInstanceState.getDouble("input1Tag");
+            input2 = savedInstanceState.getDouble("input2Tag");
+            action = savedInstanceState.getChar("actionTag");
+
         super.onRestoreInstanceState(savedInstanceState);
     }
 
@@ -73,9 +80,12 @@ public class MainActivity extends AppCompatActivity {
         butDot = findViewById(R.id.dot);
         butPercentage = findViewById(R.id.operationPercent);
 
-        if(savedResult==null){
+        if(savedInstanceState==null){
             savedResult="0";
             savedHistory="";
+            input1=0.0;
+            input2=0.0;
+            action='x';
         }
         clickingNumb();
         operations();
