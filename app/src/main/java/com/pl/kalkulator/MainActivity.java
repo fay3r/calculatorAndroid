@@ -1,5 +1,6 @@
 package com.pl.kalkulator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Integer mode=1;
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("savedResultTag",savedResult);
         outState.putString("savedHistoryTag",savedHistory);
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(plus){
-                    input2=Math.sqrt(Double.valueOf(edit.getText().toString()));
+                    input2=Math.sqrt(Double.parseDouble(edit.getText().toString()));
                     savedResult= input2.toString();
                     edit.setText(savedResult);
                 }else {
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(plus){
-                    input2=Math.log10(Double.valueOf(edit.getText().toString()));
+                    input2=Math.log10(Double.parseDouble(edit.getText().toString()));
                     savedResult= input2.toString();
                     edit.setText(savedResult);
                 }else {
@@ -379,7 +380,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!savedResult.isEmpty()){
                     input1 = Double.parseDouble(edit.getText().toString());
-                    if(plus==false) {
+                    if(!plus) {
                         input1 = -input1;
                     }
                     savedHistory=input1 +" + ";
@@ -398,7 +399,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!savedResult.isEmpty()){
                     input1 = Double.parseDouble(edit.getText().toString());
-                    if(plus==false) {
+                    if(!plus) {
                         input1 = -input1;
                     }
                     savedHistory=input1 +" - ";
@@ -417,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!savedResult.isEmpty()){
                     input1 = Double.parseDouble(edit.getText().toString());
-                    if(plus==false) {
+                    if(!plus) {
                         input1 = -input1;
                     }
                     savedHistory=input1 +" * ";
@@ -437,7 +438,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!savedResult.isEmpty()){
                     input1 = Double.parseDouble(edit.getText().toString());
-                    if(plus==false) {
+                    if(!plus) {
                         input1 = -input1;
                     }
                     savedHistory=input1 +" / ";
