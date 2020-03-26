@@ -19,12 +19,27 @@ public class MainActivity extends AppCompatActivity {
     Button sqrt,log10,silnia,butDouble,butTriple;
     Double input1,input2;
     Character action;
-    String helper;
+    String savedHistory,savedResult;
     Integer mode=1;
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("savedResultTag",savedResult);
+        outState.putString("savedHistoryTag",savedHistory);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+            savedResult = savedInstanceState.getString("savedResultTag");
+            savedHistory = savedInstanceState.getString("savedHistoryTag");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(null);
+
         setContentView(R.layout.activity_main);
 
         edit = findViewById(R.id.textField);
@@ -57,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
         butDot = findViewById(R.id.dot);
         butPercentage = findViewById(R.id.operationPercent);
 
+        if(savedResult==null){
+            savedResult="0";
+            savedHistory="";
+        }
         clickingNumb();
         operations();
         finalResult();
@@ -71,8 +90,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(plus){
                     input2=Math.sqrt(Double.valueOf(edit.getText().toString()));
-                    edit.setText(input2.toString());
+                    savedResult= input2.toString();
+                    edit.setText(savedResult);
                 }else {
+                    savedResult="NaN";
                     edit.setText("NaN");
                     mode=0;
                     blocker();
@@ -85,8 +106,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(plus){
                     input2=Math.log10(Double.valueOf(edit.getText().toString()));
-                    edit.setText(input2.toString());
+                    savedResult= input2.toString();
+                    edit.setText(savedResult);
                 }else {
+                    savedResult="NaN";
                     edit.setText("NaN");
                     mode=0;
                     blocker();
@@ -104,14 +127,15 @@ public class MainActivity extends AppCompatActivity {
                         s = s * i;
                         i++;
                     }
-                    edit.setText(Integer.toString(s));
+                    savedResult= Integer.toString(s);
+                    edit.setText(savedResult);
                 }
                 else{
+                    savedResult="NaN";
                     edit.setText("NaN");
                     mode=0;
                     blocker();
                 }
-
             }
         });
 
@@ -123,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
                     input2=-input2;
                 }
                 input2=Math.pow(input2,2);
-                edit.setText(input2.toString());
+                savedResult= input2.toString();
+                edit.setText(savedResult);
             }
         });
 
@@ -135,9 +160,9 @@ public class MainActivity extends AppCompatActivity {
                     input2=-input2;
                 }
                 input2=Math.pow(input2,3);
-                edit.setText(input2.toString());
+                savedResult= input2.toString();
+                edit.setText(savedResult);
             }
-
         });
     }
 
@@ -145,10 +170,12 @@ public class MainActivity extends AppCompatActivity {
         but1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edit.getText().toString().equals("0")){
-                    edit.setText("1");
+                if(savedResult.equals("0")){
+                    savedResult="1";
+                    edit.setText(savedResult);
                 }else {
-                    edit.setText(edit.getText() + "1");
+                    savedResult= savedResult+"1";
+                    edit.setText(savedResult);
                 }
             }
         });
@@ -157,10 +184,12 @@ public class MainActivity extends AppCompatActivity {
         but2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edit.getText().toString().equals("0")) {
-                    edit.setText("2");
-                } else {
-                    edit.setText(edit.getText() + "2");
+                if(savedResult.equals("0")){
+                    savedResult="2";
+                    edit.setText(savedResult);
+                }else {
+                    savedResult= savedResult+"2";
+                    edit.setText(savedResult);
                 }
             }
         });
@@ -168,10 +197,12 @@ public class MainActivity extends AppCompatActivity {
         but3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edit.getText().toString().equals("0")) {
-                    edit.setText("3");
-                } else {
-                    edit.setText(edit.getText() + "3");
+                if(savedResult.equals("0")){
+                    savedResult="3";
+                    edit.setText(savedResult);
+                }else {
+                    savedResult= savedResult+"3";
+                    edit.setText(savedResult);
                 }
             }
         });
@@ -179,10 +210,12 @@ public class MainActivity extends AppCompatActivity {
         but4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edit.getText().toString().equals("0")){
-                    edit.setText("4");
+                if(savedResult.equals("0")){
+                    savedResult="4";
+                    edit.setText(savedResult);
                 }else {
-                    edit.setText(edit.getText() + "4");
+                    savedResult= savedResult+"4";
+                    edit.setText(savedResult);
                 }
             }
         });
@@ -190,10 +223,12 @@ public class MainActivity extends AppCompatActivity {
         but5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edit.getText().toString().equals("0")){
-                    edit.setText("5");
+                if(savedResult.equals("0")){
+                    savedResult="5";
+                    edit.setText(savedResult);
                 }else {
-                    edit.setText(edit.getText() + "5");
+                    savedResult= savedResult+"5";
+                    edit.setText(savedResult);
                 }
             }
         });
@@ -201,10 +236,12 @@ public class MainActivity extends AppCompatActivity {
         but6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edit.getText().toString().equals("0")){
-                    edit.setText("6");
+                if(savedResult.equals("0")){
+                    savedResult="6";
+                    edit.setText(savedResult);
                 }else {
-                    edit.setText(edit.getText() + "6");
+                    savedResult= savedResult+"6";
+                    edit.setText(savedResult);
                 }
             }
         });
@@ -212,10 +249,12 @@ public class MainActivity extends AppCompatActivity {
         but7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edit.getText().toString().equals("0")){
-                    edit.setText("7");
+                if(savedResult.equals("0")){
+                    savedResult="7";
+                    edit.setText(savedResult);
                 }else {
-                    edit.setText(edit.getText() + "7");
+                    savedResult= savedResult+"7";
+                    edit.setText(savedResult);
                 }
             }
         });
@@ -223,10 +262,12 @@ public class MainActivity extends AppCompatActivity {
         but8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edit.getText().toString().equals("0")){
-                    edit.setText("8");
+                if(savedResult.equals("0")){
+                    savedResult="8";
+                    edit.setText(savedResult);
                 }else {
-                    edit.setText(edit.getText() + "8");
+                    savedResult= savedResult+"8";
+                    edit.setText(savedResult);
                 }
             }
         });
@@ -234,10 +275,12 @@ public class MainActivity extends AppCompatActivity {
         but9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edit.getText().toString().equals("0")) {
-                    edit.setText("9");
-                } else {
-                    edit.setText(edit.getText() + "9");
+                if(savedResult.equals("0")){
+                    savedResult="9";
+                    edit.setText(savedResult);
+                }else {
+                    savedResult= savedResult+"9";
+                    edit.setText(savedResult);
                 }
             }
         });
@@ -245,10 +288,12 @@ public class MainActivity extends AppCompatActivity {
         but0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edit.getText().toString().equals("0")){
-                    edit.setText("0");
+                if(savedResult.equals("0")){
+                    savedResult="0";
+                    edit.setText(savedResult);
                 }else {
-                    edit.setText(edit.getText() + "0");
+                    savedResult= savedResult+"0";
+                    edit.setText(savedResult);
                 }
             }
         });
@@ -266,44 +311,47 @@ public class MainActivity extends AppCompatActivity {
                 if(input1 !=null && input2!=null){
                     switch (action){
                         case '+':
-                            history.append(edit.getText());
-                            edit.setText(String.valueOf(input1+input2));
+                            savedHistory=savedHistory+savedResult;
+                            history.setText(savedHistory);
+                            savedResult=String.valueOf(input1+input2);
+                            edit.setText(savedResult);
                             action='x';
                             break;
                         case '-':
-                            history.append(edit.getText());
-                            edit.setText(String.valueOf(input1-input2));
+                            savedHistory=savedHistory+savedResult;
+                            history.setText(savedHistory);
+                            savedResult=String.valueOf(input1-input2);
+                            edit.setText(savedResult);
                             action='x';
                             break;
 
                         case '*':
-                            history.append(edit.getText());
-                            edit.setText(String.valueOf(input1*input2));
+                            savedHistory=savedHistory+savedResult;
+                            history.setText(savedHistory);
+                            savedResult=String.valueOf(input1*input2);
+                            edit.setText(savedResult);
                             action='x';
                             break;
 
                         case '/':
                             if(input2!=0){
-                                history.append(edit.getText());
-                                edit.setText(String.valueOf(input1/input2));
+                                savedHistory=savedHistory+savedResult;
+                                history.setText(savedHistory);
+                                savedResult=String.valueOf(input1/input2);
+                                edit.setText(savedResult);
                                 action='x';
                             break;
                             }else
                             {
-                                history.append(edit.getText());
-                                edit.setText("NaN");
+                                savedHistory=savedHistory+savedResult;
+                                history.setText(savedHistory);
+                                savedResult="NaN";
+                                edit.setText(savedResult);
                                 mode=0;
                                 blocker();
                                 action='x';
                             }
-
-                        default:
-                            break;
                     }
-
-                }
-                else{
-
                 }
             }
         });
@@ -315,8 +363,10 @@ public class MainActivity extends AppCompatActivity {
         butAC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edit.setText("0");
-                history.setText("");
+                savedResult="0";
+                edit.setText(savedResult);
+                savedHistory="";
+                history.setText(savedHistory);
                 plus=true;
                 sign.setText("");
                 mode=1;
@@ -327,13 +377,15 @@ public class MainActivity extends AppCompatActivity {
         butAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!edit.getText().toString().isEmpty()){
+                if(!savedResult.isEmpty()){
                     input1 = Double.parseDouble(edit.getText().toString());
                     if(plus==false) {
                         input1 = -input1;
                     }
-                    history.setText(input1 +" + ");
-                    edit.setText("0");
+                    savedHistory=input1 +" + ";
+                    history.setText(savedHistory);
+                    savedResult="0";
+                    edit.setText(savedResult);
                     plus=true;
                     sign.setText("");
                     action='+';
@@ -344,13 +396,15 @@ public class MainActivity extends AppCompatActivity {
         butSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!edit.getText().toString().isEmpty()){
+                if(!savedResult.isEmpty()){
                     input1 = Double.parseDouble(edit.getText().toString());
                     if(plus==false) {
                         input1 = -input1;
                     }
-                    history.setText(input1 +" - ");
-                    edit.setText("0");
+                    savedHistory=input1 +" - ";
+                    history.setText(savedHistory);
+                    savedResult="0";
+                    edit.setText(savedResult);
                     plus=true;
                     sign.setText("");
                     action='-';
@@ -361,13 +415,15 @@ public class MainActivity extends AppCompatActivity {
         butMult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!edit.getText().toString().isEmpty()){
+                if(!savedResult.isEmpty()){
                     input1 = Double.parseDouble(edit.getText().toString());
                     if(plus==false) {
                         input1 = -input1;
                     }
-                    history.setText(input1 +" * ");
-                    edit.setText("0");
+                    savedHistory=input1 +" * ";
+                    history.setText(savedHistory);
+                    savedResult="0";
+                    edit.setText(savedResult);
                     plus=true;
                     sign.setText("");
                     action='*';
@@ -379,13 +435,15 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                if(!edit.getText().toString().isEmpty()){
+                if(!savedResult.isEmpty()){
                     input1 = Double.parseDouble(edit.getText().toString());
                     if(plus==false) {
                         input1 = -input1;
                     }
-                    history.setText(input1 +" / ");
-                    edit.setText("0");
+                    savedHistory=input1 +" / ";
+                    history.setText(savedHistory);
+                    savedResult="0";
+                    edit.setText(savedResult);
                     plus=true;
                     sign.setText("");
                     action='/';
@@ -410,7 +468,8 @@ public class MainActivity extends AppCompatActivity {
         butPercentage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edit.setText(String.valueOf(Double.parseDouble(edit.getText().toString())*0.01));
+                savedResult=String.valueOf(Double.parseDouble(savedResult)*0.01);
+                edit.setText(savedResult);
             }
         });
 
@@ -418,10 +477,9 @@ public class MainActivity extends AppCompatActivity {
         butDot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper=edit.getText().toString();
-                if(!helper.contains(".")){
-                    helper+=".";
-                    edit.setText(helper);
+                if(!savedResult.contains(".")){
+                    savedResult+=".";
+                    edit.setText(savedResult);
                 }
 
             }
@@ -430,13 +488,13 @@ public class MainActivity extends AppCompatActivity {
         butDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper=edit.getText().toString();
-                if(!helper.isEmpty()){
-                    helper=helper.subSequence(0,helper.length()-1).toString();
-                    if(helper.equals("")) {
-                        edit.setText("0");
+                if(!savedResult.isEmpty()){
+                    savedResult=savedResult.subSequence(0,savedResult.length()-1).toString();
+                    if(savedResult.equals("")) {
+                        savedResult="0";
+                        edit.setText(savedResult);
                     }else{
-                        edit.setText(helper);
+                        edit.setText(savedResult);
                     }
                 }
             }
